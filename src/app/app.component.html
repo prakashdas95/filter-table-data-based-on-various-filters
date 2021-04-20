@@ -1,0 +1,67 @@
+<div style=" width: 600px; margin-left: auto;margin-right: auto;">
+    <form class="example-form" [formGroup]="contactform">
+        <div style="display: flex;gap:10px; width: 600px;">
+            <mat-form-field class="example-full-width">
+                <mat-label>First Name</mat-label>
+                <input matInput formControlName="firstName">
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <mat-label>Last Name</mat-label>
+                <input matInput formControlName="lastName">
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <mat-label>Company</mat-label>
+                <input matInput formControlName="company">
+            </mat-form-field>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; width: 600px;">
+            <mat-form-field appearance="fill">
+                <mat-label>Filter by status</mat-label>
+                <mat-select formControlName="status">
+                    <mat-option value='none'>None</mat-option>
+                    <mat-option *ngFor="let status of status" [value]="status">
+                        {{status}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Filter by Multi select</mat-label>
+                <mat-select formControlName="multiSelect" multiple>
+                    <mat-option *ngFor="let status of status" [value]="status">{{status}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </form>
+
+</div>
+
+
+<br>
+<div class="mat-elevation-z8" style="width: 80%; margin-left: auto;margin-right: auto;">
+    <table mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="firstName">
+            <th mat-header-cell *matHeaderCellDef> First Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="lastName">
+            <th mat-header-cell *matHeaderCellDef>Last Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="company">
+            <th mat-header-cell *matHeaderCellDef>Company</th>
+            <td mat-cell *matCellDef="let element"> {{element.company}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef>Status</th>
+            <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>
